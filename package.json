@@ -1,5 +1,5 @@
 {
-  "name": "v-scaffold",
+  "name": "vs-scaffold",
   "version": "1.0.0",
   "description": "a scaffold for vue template init",
   "main": "index.js",
