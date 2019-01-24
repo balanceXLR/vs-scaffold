@@ -1,6 +1,6 @@
 {
   "name": "vs-scaffold",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "a scaffold for vue template init",
   "main": "index.js",
   "scripts": {},
