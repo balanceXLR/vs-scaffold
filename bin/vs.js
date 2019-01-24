@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 'use strict'
 
 process.env.NODE_PATH = __dirname + '/../node_modules/'

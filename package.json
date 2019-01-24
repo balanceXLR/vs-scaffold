@@ -1,11 +1,11 @@
 {
   "name": "vs-scaffold",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "a scaffold for vue template init",
   "main": "index.js",
   "scripts": {},
   "bin": {
-    "vs": "bin/vs"
+    "vs": "bin/vs.js"
   },
   "author": "shenjiaheng",
   "license": "ISC",

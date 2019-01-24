@@ -7,7 +7,7 @@ const ora = require('ora')
 module.exports = () => {
     let tplList = []
     for (let i in config.tpl) {
-      tplList.push(`${i}——${chalk.yellow(config.tpl[i].description)}`)
+      tplList.push(`${i}`)
     }
     inquirer.prompt([{
       type: 'list',
