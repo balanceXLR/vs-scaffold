@@ -1,38 +1,37 @@
 'use strict'
 const exec = require('child_process').exec
-const co = require('co')
-const prompt = require('co-prompt')
 const config = require('../templates')
 const chalk = require('chalk')
-
+const inquirer = require('inquirer')
+const ora = require('ora')
 module.exports = () => {
- co(function *() {
-    // 处理用户输入
-  	let tplName = yield prompt('Template name: ')
-  	let projectName = yield prompt('Project name: ')
-  	let gitUrl
-  	let branch
-
-	if (!config.tpl[tplName]) {
-    	console.log(chalk.red('\n × Template does not exit!'))
-    	process.exit()
+    let tplList = []
+    for (let i in config.tpl) {
+      tplList.push(`${i}——${chalk.yellow(config.tpl[i].description)}`)
     }
-	gitUrl = config.tpl[tplName].url
-	branch = config.tpl[tplName].branch
-
-    // git命令，远程拉取项目并自定义项目名
-    let cmdStr = `git clone ${gitUrl} ${projectName} && cd ${projectName} && git checkout ${branch}`
-
-	console.log(chalk.white('\n Start generating...'))
-
-	exec(cmdStr, (error, stdout, stderr) => {
-      if (error) {
-        console.log(error)
+    inquirer.prompt([{
+      type: 'list',
+      name: 'templates',
+      message: '请选择初始化模板：',
+      choices: tplList
+    }]).then(res => {
+      const spinner = ora('模板下载中...').start()
+      let gitUrl = config.tpl[res.templates].url
+      let branch = config.tpl[res.templates].branch
+      let cmdStr = `git clone ${gitUrl} . && git checkout ${branch}`
+      exec(cmdStr, (error, stdout, stderr) => {
+        if (error && error.code == 128) {
+          spinner.fail('请在空目录中初始化！')
+          process.exit()
+        }
+        if (error) {
+          console.log(stderr)
+          spinner.fail('模板下载失败！')
+          process.exit()
+        }
+        spinner.succeed('模板下载成功！')
         process.exit()
-      }
-      console.log(chalk.green('\n √ Generation completed!'))
-      console.log(`\n cd ${projectName} && npm install \n`)
-      process.exit()
-	})
-  })
+      })
+    })
+
 }

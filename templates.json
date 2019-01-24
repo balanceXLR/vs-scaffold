@@ -1,8 +1,1 @@
-{
-    "tpl": {
-        "vc-component": {
-            "url": "https://github.com/1465799166/vc-component.git",
-            "branch": "master"
-        }
-    }
-}
+{"tpl":{"vc-component":{"url":"https://github.com/1465799166/vc-component","branch":"master","description":"Vue组件开发通用模板"}}}
