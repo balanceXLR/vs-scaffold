@@ -11,7 +11,7 @@
 npm install vs-scaffold -g
 ```
 ## 初始化项目
-新建项目目录，如`test-vs`，进入并执行一下命令：
+新建项目目录，如`test-vs`，进入并执行以下命令：
 ``` bash
 vs init
 ```
