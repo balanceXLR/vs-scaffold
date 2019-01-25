@@ -18,7 +18,7 @@ module.exports = () => {
       const spinner = ora('模板下载中...').start()
       let gitUrl = config.tpl[res.templates].url
       let branch = config.tpl[res.templates].branch
-      let cmdStr = `git clone ${gitUrl} . && git checkout ${branch}`
+      let cmdStr = `git clone ${gitUrl} . && git checkout ${branch} && git remote remove origin`
       exec(cmdStr, (error, stdout, stderr) => {
         if (error && error.code == 128) {
           spinner.fail('请在空目录中初始化！')
